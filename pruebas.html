@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dropdown con Mouseover</title>
+    <style>
+        /* Estilos básicos para el dropdown */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            /*z-index: 1;*/
+        }
+
+        .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dropdown">
+    <button id="dropdownButton">Desplegar Menú</button>
+    <div id="miDropdown" class="dropdown-menu">
+        <a href="#">Enlace 1</a>
+        <a href="#">Enlace 2</a>
+        <a href="#">Enlace 3</a>
+    </div>
+</div>
+
+<script>
+    var dropdown = document.getElementById('dropdownButton');
+var dropdownMenu = document.getElementById('miDropdown');
+
+dropdown.onmouseover = dropdownMenu.onmouseover = function() {
+    dropdownMenu.style.display = 'block';
+};
+
+dropdown.onmouseout = dropdownMenu.onmouseout = function() {
+    dropdownMenu.style.display = 'none';
+};
+
+</script>
+
+</body>
+</html>
