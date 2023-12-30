@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ESCOMHUB</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -30,9 +31,53 @@
                                             </a>
                                             <div class="container-fluid">
                                                 <ul class="dropdown-menu menu_desplegable_index">
-                                                    <li><a class="dropdown-item my-2 me-1" href="#">¿Cómo me registro?</a></li>
-                                                    <li><a class="dropdown-item my-2 me-1 " href="#">Qué necesito para formar parte</a></li>
-                                                    <li><a class="dropdown-item my-2  me-1" href="#">Tinen algun costo para el vendedor?</a></li>
+                                                    <li>   
+                                                        <a class="dropdown-item my-2 me-1" data-bs-toggle="collapse" href="#collapseExample"  >¿Cómo me registro?</a>
+                                                        <div class="collapse" id="collapseExample">
+                                                            <div  class="card card-body letraadvant text-justify">
+                                                                Si eres cliente el siguiente formulario te ayudará a registrarte, una vez registrado, puedes iniciar sesión desde el apartado de login 
+                                                                <a class="text-center my-1" href="formulariocliente.html"><button type="button" class="btn btn-outline-dark"> Cliente</button></a>
+                                                                si eres vendedor el siguiente formulario es para tí
+                                                                <a class="text-center my-1" href="formulariovendedor.html"><button type="button" class="btn btn-outline-dark"> vendedor</button></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item my-2 me-1 " data-bs-toggle="collapse" href="#collapseRequisitos">Qué necesito para formar parte</a>
+                                                        <div class="collapse" id="collapseRequisitos">
+                                                            <div class="card card-body letraadvant text-justify">
+                                                                Para ser cliente basta con proporcionarnos los siguientes datos:
+                                                                <ul>
+                                                                    <li>Nombre completo</li>
+                                                                    <li>Boleta</li>
+                                                                    <li>Correo electronico</li>
+                                                                    <li>Alguna red social</li>
+                                                                </ul>
+                                                                Para ser vendedor basta con proporcionarnos los siguientes datos:
+                                                                <ul>
+                                                                    <li>Nombre completo</li>
+                                                                    <li>Boleta</li>
+                                                                    <li>Correo electronico</li>
+                                                                    <li>Whatsapp (obligatorio)</li>
+                                                                    <li>Facebook (obligatorio)</li>
+                                                                    <li>Categoria o categorias de productos</li>
+                                                                    <li>Horarios de atención</li>
+                                                                    <li>Para la publicación de articulos se necesita una fotografia nitida de 300x150 px en cualquier formato tipo imagen</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item my-2 me-1 " data-bs-toggle="collapse" href="#collapsecostos">Tinen algun costo para el vendedor?</a>
+                                                        <div class="collapse" id="collapsecostos">
+                                                            <div class="card card-body letraadvant text-justify">
+                                                                Para los vendedores se les cobrara una pequeña tarifa de acuerdo a la categoria del producto,
+                                                                si gustas adquirir la membresia de ESCOMhub, tiene un costo de $300 pesos le cual tiene como principal beneficio
+                                                                que aparezca el producto en el banner principal.
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -90,7 +135,7 @@
             </nav>
             <div class="Navbarestilos borde-top  d-none d-lg-block">
                 <div class="contenedor ">
-                    <img class="logo_marca" src="imgs/logo.png" alt="Logo_escom_hub">
+                    <a href="index.html"><img class="logo_marca" src="imgs/logo.png" alt="Logo_escom_hub"></a>
                 </div>
                 <div>
                     <p  class=" fuente-eslogan text-center mb-0 ">¡Conecta, Compra, Estudia! Tu mercado estudiantil en un solo lugar</p>
@@ -333,12 +378,68 @@
         </main>
         <footer class="py-3 mt-5 footerestilos">
             <ul class="nav justify-content-center pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 ">Contacto</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 ">Conocenos</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 ">Forma parte de ESCOMHUB</li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Contacto</a>
+                    <!-- Modal -->
+                    <div class="modal fade letraalef" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-4 fw-bold" id="staticBackdropLabel">Contacto</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h2 class="fs-5">Correo de desarolladores </h2>
+                                <p class="fs-6 letraalef text-dark">En caso de alguna duda con el sistema o inconsistencia favor de enviar correo a los siguientes correos</p>
+                                <br>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">morales.martinez.jose.antonio@gmail.com</li>
+                                        <li class="list-group-item">brandonbeleche11@gmail.com</li>
+                                        <li class="list-group-item">amadridc1800@alumno.ipn.mx</li>
+                                    </ul>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Conocenos</a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-4" id="exampleModalLabel">Conocenos</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <i class="fab fa-facebook-square"></i> EscomHubIPN
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fab fa-instagram-square"></i> EscomHubIPN
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fa-brands fa-tiktok"></i> EscomHub
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                
+                </li>
+                <li class="nav-item"><a href="formulariovendedor.html" class="nav-link px-2 ">Forma parte de ESCOMHUB</li>
             </ul>
-            <p class="text-center ">© 2023 ESCOMHUB</p>
-    </footer>
+            <a style="text-decoration: none;" href="index.html"><p class="text-center ">© 2023 ESCOMHUB</p></a>
+        </footer>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
