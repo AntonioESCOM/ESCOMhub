@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Baloo+2&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alef&display=swap');
+
+
+.Navbarestilos{
+    background-color: #263C97;
+}
+.Navbarestilos a,p{
+    color: white;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 700;
+
+}
+.Navbarestilos button{
+    background-color: white;
+}
+
+.fuente-eslogan{
+    font-family: 'Architects Daughter', sans-serif;
+    font-weight: 400;
+    font-size: larger;
+}
+.icon-container {
+    position: relative;
+    display: inline-block; /* O cualquier otro display que se ajuste a tus necesidades */
+    font-size: 24px; /* Ajusta esto según el tamaño de tus iconos */
+}
+
+
+.icon-top {
+    position: absolute;
+    top: 0;
+    left: 1.7rem;
+    width: 1.6rem;
+    color: #FCBE00;
+    /* Ajusta 'top' y 'left' para posicionar el icono superior como desees */
+}
+
+#Navbarfecha{
+    float: right;
+}
+.coloramarillo{
+    background-color: #FCBE00;
+}
+
+.letraadvant{
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: bold;
+}
+.letrabaloo{
+    font-family: 'Baloo', sans-serif;
+    font-weight: 400;
+}
+.letraalef{
+    font-family: 'Alef', sans-serif;
+    font-weight: 400;
+}
+.letracards{
+    font-family: 'Alef', sans-serif;
+    font-weight: 400;
+    color: #0044C9;
+}
+.colorletrasprecio{
+    color:#C81E1E;
+}
+.productocarrusel{
+    position: relative;
+    transform: rotate(25deg);
+}
+.estrellas{
+    vertical-align: middle;
+}
+.estrellas p{
+    display: inline;
+}
+.sinborde{
+    border: none;
+}
+
+button a{
+    text-decoration: none;
+}
+h6 a{
+    text-decoration: none;
+    color: black;
+}
+.footerestilos{
+    background-color: #263C97;
+}
+.colorfondolog{
+    background-color: #E5DFD3;
+}
+
+.botoncar-comprodcuto{
+    background-color: #263C97;
+    color: white;
+}
+.footerestilos a,p{
+    color: white;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 700;
+}
+.footerestilos ul{
+    border-bottom: 1px solid #6562E4 ;
+}
+.estilolinkregistro{
+    color: #263C97;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 700;
+}
+
+
+.menu_desplegable_index a{
+    color:#665;
+}
+.menu_desplegable_index a:hover{
+    color:#e5ac00;
+}
+.color_card_descrip{
+    background-color: #F1F1F1;
+}
+.divConScroll {
+    height: 200px;     /* Alto fijo */
+    overflow: auto;    /* Muestra scrollbars automáticamente cuando es necesario */
+}
+.ocultar_contacto{
+    display: none;
+}
+@media (min-width: 992px) {
+    .borde-derecho {
+        border-top: none; /* Quita el borde superior */
+        border-bottom: none; /* Quita el borde inferior */
+        border-left: none; /* Quita el borde izquierdo */
+        border-right: 1px solid #6562E4; /* Establece el borde derecho, ajusta según tus necesidades */
+    }
+}
+
+@media (min-width: 992px) {
+    .logo_marca{
+        width: 12rem;  /* Ancho fijo de 300 píxeles */
+        height: 5rem;
+    }
+
+    .borde-top {
+        border-top: 1px solid #6562E4; /* Quita el borde superior */
+        border-bottom: none; /* Quita el borde inferior */
+        border-left: none; /* Quita el borde izquierdo */
+        border-right: none;  /* Establece el borde derecho, ajusta según tus necesidades */
+    }
+
+    .contenedor {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center;     /* Centra verticalmente */
+        height:auto;           /* Altura del contenedor */
+    }
+
+    .dropdown-mio {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        /*z-index: 1;*/
+    }
+
+    .dropdown-mio a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+}
+
+@media (max-width: 992px) {
+    .logo_marca_sm{
+        width: 25%;  /* Ancho fijo de 300 píxeles */
+        height: 50%;
+    }
+    .flecha-sugerencia{
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .boton-compra-sm{
+        margin-top: 1rem;
+        border-radius: 0 !important;
+    }
+    .div_botoncar-comprodcuto{
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+}
+
+.alerta{
+    color: #ff3333;
+    text-align: center;
+    text-transform: uppercase;
+}
+
