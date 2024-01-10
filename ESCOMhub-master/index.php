@@ -1,5 +1,16 @@
 <?php
     require_once("configurar.php");
+    session_start();
+    if(isset($_SESSION['boleta_sesion'])){
+        $boleta = $_SESSION['boleta_sesion'];
+        $usuario = $_SESSION['usuario_sesion'];
+    }
+
+    if (isset($_GET['cerrar_sesion'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit(); // Asegúrate de que el script se detenga después de redirigir
+}
 ?>
 
 <html lang="es">
@@ -92,7 +103,7 @@
                                             <div class="container-fluid">
                                                 <ul class="dropdown-menu menu_desplegable_index d1">
                                                     <li><a class="dropdown-item my-2 me-1" href="#">Quiero vender</a></li>
-                                                    <li><a class="dropdown-item my-2 me-1 " href="crud_vendedor.php">Productos publicados</a></li>
+                                                    <li><a class="dropdown-item my-2 me-1 " href="#">Productos publicados</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -116,6 +127,16 @@
                                             </div>
                                         </div>
                                     </li>
+                            <?php
+                                if (isset($_SESSION['boleta_sesion']) && !empty($_SESSION['boleta_sesion'])) {
+                                    echo '
+                                    <li class="nav-item">
+                                            <a class="nav-link borde-derecho py-0 px-4" aria-expanded="false" href="?cerrar_sesion=1">
+                                                Cerrar sesión
+                                            </a>
+                                    </li>';
+                                }
+                            ?>
                                 </ul>
                             </div>
                             <div class="col-4 d-none d-lg-block">    
@@ -128,10 +149,7 @@
                             </div>
                         
                         </div>
-    
-    
-                            
-                        
+
                     </div>
                 </div>
             
@@ -194,23 +212,49 @@
                             </div>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active px-0" href="login.php">
-                                <div class="container-fluid">
-                                    <div style="width:12.5rem;" class="row">
-                                        <div class="col-7 px-0">                        
-                                            <i class="bi bi-person"></i> Identificate<br>
-                                            <span>Iniciar sesión</span>
-                                        </div>
-                                        <div class="col-5 px-0 my-auto">
-                                            <svg style="width:2.5rem;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
-                                            </svg>
-                                        </div>
+                        <?php
+                    if (isset($_SESSION['boleta_sesion']) && !empty($_SESSION['boleta_sesion'])) {
+                    echo '
+                    <li class="nav-item">
+                        <a class="nav-link active px-0" href="catalogov.php">
+                            <div class="container-fluid">
+                                <div style="width:12.5rem;" class="row">
+                                    <div class="col-7 px-0">
+                                                                
+                                            <i class="bi bi-person"></i>'.$boleta.'<br>
+                                            <span>'.$usuario.'</span>
+                                    </div>
+                                    <div class="col-5 px-0 my-auto">
+                                        <svg style="width:2.5rem;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
+                                        </svg>
                                     </div>
                                 </div>
-                            </a>
-                        </li> 
+                            </div>
+                        </a>
+                    </li>';
+
+            }else{
+                    echo'
+                        <li class="nav-item">
+                        <a class="nav-link active px-0" href="login.php">
+                            <div class="container-fluid">
+                                <div style="width:12.5rem;" class="row">
+                                    <div class="col-7 px-0">                        
+                                        <i class="bi bi-person"></i> Identificate<br>
+                                        <span>Iniciar sesión</span>
+                                    </div>
+                                    <div class="col-5 px-0 my-auto">
+                                        <svg style="width:2.5rem;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>';
+                }    
+            ?>
                     </ul>
                     </div>
                     <div style="width: 31rem;">
@@ -242,9 +286,7 @@
                             <p class="text-center mt-5 mb-0 letrabaloo fs-5">SOLCHECITOS EXTREMOS AL 2X1</p>
                             <p class="text-center fuente-eslogan fs-5">CONOCE LA NUEVA FORMA DE BOTANEAR</p>  
                             <div class="text-center mt-5">
-                                <button  style="border-radius: 0;" type="button" class="btn bg-white letraadvant"> 
-                                <a href="solchecitos.php">COMPRAR AHORA</a>
-                            </button>
+                                <button  style="border-radius: 0;" type="button" class="btn bg-white letraadvant"> COMPRA AHORA</button>
                             </div>
                         </div>
                         <div class="col">

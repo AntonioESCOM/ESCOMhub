@@ -1,11 +1,3 @@
-<?php
-    session_start();
-    if(isset($_SESSION['boleta_sesion'])){
-        $boleta = $_SESSION['boleta_sesion'];
-        $usuario = $_SESSION['usuario_sesion'];
-    }
-?>
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -97,7 +89,7 @@
                                             <div class="container-fluid">
                                                 <ul class="dropdown-menu menu_desplegable_index d1">
                                                     <li><a class="dropdown-item my-2 me-1" href="#">Quiero vender</a></li>
-                                                    <li><a class="dropdown-item my-2 me-1 " href="#">Productos publicados</a></li>
+                                                    <li><a class="dropdown-item my-2 me-1 " href="crud_vendedor.php">Productos publicados</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -198,32 +190,7 @@
                         </div>
                         </a>
                     </li>
-
-                <?php
-                    if (isset($_SESSION['boleta_sesion']) && !empty($_SESSION['boleta_sesion'])) {
-                    echo '
                     <li class="nav-item">
-                        <a class="nav-link active px-0" href="catalogov.html">
-                            <div class="container-fluid">
-                                <div style="width:12.5rem;" class="row">
-                                    <div class="col-7 px-0">
-                                                                
-                                            <i class="bi bi-person"></i>'.$boleta.'<br>
-                                            <span>'.$usuario.'</span>
-                                    </div>
-                                    <div class="col-5 px-0 my-auto">
-                                        <svg style="width:2.5rem;" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>';
-
-            }else{
-                    echo'
-                        <li class="nav-item">
                         <a class="nav-link active px-0" href="login.php">
                             <div class="container-fluid">
                                 <div style="width:12.5rem;" class="row">
@@ -239,9 +206,7 @@
                                 </div>
                             </div>
                         </a>
-                    </li>';
-                }    
-            ?>
+                    </li> 
                 </ul>
                 </div>
                 <div style="width: 31rem;">
@@ -262,22 +227,13 @@
                 <div class="col-sm-5">
                     <div class="mx-auto p-5 text-center">
                         <h2 class="letracards text-dark  fs-2 fw-bold">
-                            Galletas Cotsco
+                            Papas Sol
                         </h2>
-                        <img src="imgs/image 11 (1).png" class="card-img-top" alt="Galleta costo">
-                        <p class="text-dark fs-5">Fecha de publicación <span> 4 de Diciembre 2023</span></p>
+                        <img width="300px" height="156px" src="imgs/Papas-sol (1).png" class="card-img-top" alt="Solchecitos">
+                        <p class="text-dark fs-5">Fecha de publicación <span> 10 de Diciembre 2023</span></p>
                         <div class="row">
                             <div class="col-sm-6 pe-1 div_botoncar-comprodcuto">
-                            <?php
-                                if (isset($_SESSION['boleta_sesion']) && !empty($_SESSION['boleta_sesion'])) {
-                                    echo '
-                                    <button id="enseñarc" class="btn botoncar-comprodcuto w-100  rounded-start-pill boton-compra-sm fs-5" type="button">Comprar Ahora</button>';
-                                }
-                                else {
-                                    echo '
-                                    <button id="enseñarc" class=" disabled btn botoncar-comprodcuto w-100  rounded-start-pill boton-compra-sm fs-5 " type="button">Comprar Ahora</button>';
-                                }
-                            ?>
+                                <button id="enseñarc" class="btn botoncar-comprodcuto w-100  rounded-start-pill boton-compra-sm fs-5" type="button">Comprar Ahora</button>
                             </div>
                             <div class="col-sm-6 ps-1 div_botoncar-comprodcuto">
                                 <button class="btn botoncar-comprodcuto w-100 rounded-end-pill boton-compra-sm fs-5" type="button">Ahora el Carrito</button>
@@ -312,7 +268,7 @@
                                     Descripción
                                 </div>
                                 <div class="card-body color_card_descrip rounded-5 rounded-top-0 ">
-                                    <h6 class="card-title text-center fs-5 letraalef">Rica galleta del cotsco con chispas de chocolate</h6>
+                                    <h6 class="card-title text-center fs-5 letraalef">APAS SOL A TAN SOLO $18 CONOCE LA NUEVA FORMA DE BOTANEAR</h6>
                                 </div>
                             </div>
                         </div>

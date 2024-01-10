@@ -90,7 +90,7 @@
                                         <div class="container-fluid">
                                             <ul class="dropdown-menu menu_desplegable_index d1">
                                                 <li><a class="dropdown-item my-2 me-1" href="#">Quiero vender</a></li>
-                                                <li><a class="dropdown-item my-2 me-1 " href="crud_vendedor.php">Productos publicados</a></li>
+                                                <li><a class="dropdown-item my-2 me-1 " href="#">Productos publicados</a></li>
                                             </ul>
                                         </div>
                                     </div>

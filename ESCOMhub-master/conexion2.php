@@ -1,5 +1,5 @@
 <?php
-    $servidor = "localhost";
+    $servidor = "localhost:3307";
     $nombreusuario = "root";
     $password = "";
     $db = "escomhub";

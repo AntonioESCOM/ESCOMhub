@@ -92,7 +92,7 @@
                                             <div class="container-fluid">
                                                 <ul class="dropdown-menu menu_desplegable_index d1">
                                                     <li><a class="dropdown-item my-2 me-1" href="#">Quiero vender</a></li>
-                                                    <li><a class="dropdown-item my-2 me-1 " href="crud_vendedor.php">Productos publicados</a></li>
+                                                    <li><a class="dropdown-item my-2 me-1 " href="#">Productos publicados</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -185,6 +185,14 @@
                               <div class="invalid-feedback">
                                   Your username is required.
                                 </div>
+                              </div>
+                            </div>
+
+                            <div class="col-12">
+                              <label for="useremp" class="form-label">Nombre de usuario o nombre de tu empresa</label>
+                              <input type="text" class="form-control" id="useremp" name="userv">
+                              <div class="invalid-feedback">
+                                  Por favor ingrese un nombre valido
                               </div>
                             </div>
                 

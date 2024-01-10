@@ -29,6 +29,7 @@
         nombre VARCHAR(100) NOT NULL,
         apellido VARCHAR(100) NOT NULL,
         boleta VARCHAR(100) NOT NULL,
+        nomusuario VARCHAR(100) NOT NULL,
         correo VARCHAR(100) NOT NULL,
         password VARCHAR(100) NOT NULL,
         telefono VARCHAR(100) NOT NULL,

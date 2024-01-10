@@ -4,7 +4,7 @@
 	$mensaje = "";
 	if(!empty($_POST["registrar"])){
 
-		if(empty($_POST["nombrev"]) or empty($_POST["apellidov"]) or empty($_POST["boletav"]) or 
+		if(empty($_POST["nombrev"]) or empty($_POST["apellidov"]) or empty($_POST["boletav"]) or empty($_POST["userv"]) or
 			empty($_POST["correov"]) or empty($_POST["passwordv"]) or empty($_POST["pass2"]) or 
 			empty($_POST["telefonov"]) or empty($_POST["redsocialv"]) or empty($_POST["comida"]) or empty($_POST["golosinas"]) or empty($_POST["electronicaR"]) or empty($_POST["papeleriaR"]) or empty($_POST["serviciosR"]) or empty($_POST["ropa"]) or empty($_POST["videojuegos"]) or empty($_POST["libros"]) or empty($_POST["horaIn"]) or empty($_POST["horaFin"])){
 
@@ -16,11 +16,12 @@
 			$mensaje = '<div class="alerta">El correo ya se encuentra registrado.</div>';
 		}elseif ($_POST["passwordv"] == $_POST["pass2"]){ 
     		require_once("conexion2.php");
-			$sql = $conexion2->prepare("INSERT INTO vendedorestabla (nombre,apellido,boleta,correo,password,telefono,redsocial, comida_preparada, golosinas_frituras, electronica, papeleria, servicios, ropa_accesorios, videojuegos_juguetes, libros_material, hora_inicio, hora_fin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			$sql = $conexion2->prepare("INSERT INTO vendedorestabla (nombre,apellido,boleta, nomusuario,correo,password,telefono,redsocial, comida_preparada, golosinas_frituras, electronica, papeleria, servicios, ropa_accesorios, videojuegos_juguetes, libros_material, hora_inicio, hora_fin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 	
 			$nombre=$_POST['nombrev'];
 			$apellido=$_POST['apellidov'];
 			$boleta=$_POST['boletav'];
+			$nomusuario=$_POST['userv'];
 			$correo = $_POST['correov'];
 			$password = $_POST['passwordv'];
 			$telefono = $_POST['telefonov'];
@@ -37,7 +38,7 @@
 			$hora_fin = $_POST['horaFin'];
 
 
-			$sql->bind_param("sssssssssssssssss", $nombre, $apellido, $boleta, $correo, $password, $telefono, $redsocial, 
+			$sql->bind_param("ssssssssssssssssss", $nombre, $apellido, $boleta, $nomusuario, $correo, $password, $telefono, $redsocial, 
 				$comida_preparada, $golosinas_frituras, $electronica, $papeleria, $servicios, $ropa_accesorios, 
 				$videojuegos_juguetes, $libros_material, $hora_inicio, $hora_fin);
 
