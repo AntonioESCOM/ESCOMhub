@@ -203,3 +203,8 @@ h6 a{
     text-transform: uppercase;
 }
 
+.ejemplo2{
+    color: black;
+    font-size: 30px;   
+    font-weight: bold;
+}
