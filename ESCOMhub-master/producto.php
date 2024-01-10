@@ -3,6 +3,7 @@
     if(isset($_SESSION['boleta_sesion'])){
         $boleta = $_SESSION['boleta_sesion'];
         $usuario = $_SESSION['usuario_sesion'];
+        $tabla_nombre = "vendedor_" . $boleta;
     }
 ?>
 
@@ -203,7 +204,7 @@
                     if (isset($_SESSION['boleta_sesion']) && !empty($_SESSION['boleta_sesion'])) {
                     echo '
                     <li class="nav-item">
-                        <a class="nav-link active px-0" href="catalogov.html">
+                        <a class="nav-link active px-0" href="catalogov.php">
                             <div class="container-fluid">
                                 <div style="width:12.5rem;" class="row">
                                     <div class="col-7 px-0">
