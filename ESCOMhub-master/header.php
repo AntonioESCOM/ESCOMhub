@@ -1,3 +1,17 @@
+<?php
+    if(isset($_SESSION['boleta_sesion'])){
+        $boleta = $_SESSION['boleta_sesion'];
+        $usuario = $_SESSION['usuario_sesion'];
+    }
+
+    if (isset($_GET['cerrar_sesion'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+?>
+
+<html lang="es">
 <header>
             <nav class="navbar navbar-expand-lg Navbarestilos">
                 <div class="container-fluid">
@@ -66,6 +80,14 @@
                                                         </div>
                                                         
                                                     </li>
+                                        <?php
+                                            if(isset($_SESSION['boleta_sesion']) && !empty($_SESSION['boleta_sesion'])){
+                                                echo '
+                                                    <li class="nav-item">
+                                                    <a class="nav-link borde-derecho py-0 px-4" aria-expanded="false" href="?cerrar_sesion=1">Cerrar sesión</a>
+                                                    </li>';
+                                            }
+                                        ?>
                                                 </ul>
                                             </div>
                                         </div>
