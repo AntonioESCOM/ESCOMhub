@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $resultNombre->fetch_assoc();
         $_SESSION['usuario_sesion'] = $row['nomusuario'];
         $_SESSION['boleta_sesion'] = $username;
-        header("Location: producto.php");
+        header("Location: catalogov.php");
         exit();
     }
     $mensaje = '<div class="alerta">Credenciales incorrectas</div>';
