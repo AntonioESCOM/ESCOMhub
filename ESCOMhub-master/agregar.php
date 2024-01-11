@@ -1,14 +1,15 @@
 <?php
+	$mensaje = "";
 	require 'funcionesPHP.php';
 	require_once("conexion2.php");
-	$mensaje = "";
 	session_start();
     $boleta = $_SESSION['boleta_sesion'];
     $tabla_nombre = "vendedor_" . $boleta;
 	$sql = "SHOW TABLES LIKE '" . $tabla_nombre . "'";
     $stm = $conexion2->query($sql);
+
     if($stm->num_rows == 0) { //Si la tabla no existe la creamos
-        	$sql = sprintf("CREATE TABLE %s(
+        $sql = sprintf("CREATE TABLE %s(
         	id INT(11) AUTO_INCREMENT PRIMARY KEY,
         	boletavendedor VARCHAR(32) NOT NULL,
         	nombreproducto VARCHAR(32) NOT NULL,
@@ -53,8 +54,9 @@
 			} else {
 				$mensaje = '<div class="alerta">¡Error al agregar! Inténtalo de nuevo.</div>';
 			}
-			$sql->close();   
+			$resultado->close();   
 			$conexion2->close();
+	
 		}
 	}
 ?>
