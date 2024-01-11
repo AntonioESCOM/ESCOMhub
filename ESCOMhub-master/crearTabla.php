@@ -42,6 +42,8 @@
         ropa_accesorios text NOT NULL,
         videojuegos_juguetes text NOT NULL,
         libros_material text NOT NULL,
+        postres text NOT NULL,
+        bebidas text NOT NULL,
         hora_inicio TIME NOT NULL,
         hora_fin TIME NOT NULL
         )";
