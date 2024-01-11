@@ -5,6 +5,25 @@
         $boleta = $_SESSION['boleta_sesion'];
         $usuario = $_SESSION['usuario_sesion'];
         $tabla_nombre = "vendedor_" . $boleta;
+        $sql = "SHOW TABLES LIKE '" . $tabla_nombre . "'";
+        $stm = $conexion2->query($sql);
+        if($stm->num_rows == 0) { //Si la tabla no existe la creamos
+          $sql = sprintf("CREATE TABLE %s(
+          id INT(11) AUTO_INCREMENT PRIMARY KEY,
+          boletavendedor VARCHAR(32) NOT NULL,
+          nombreproducto VARCHAR(32) NOT NULL,
+          descripcion VARCHAR(300) NOT NULL,
+          precio DOUBLE NOT NULL,
+          cantidad INT(11) NOT NULL,
+          categoria VARCHAR(100) NOT NULL,
+          vendidos INT(11) NOT NULL,
+          imagen LONGBLOB NOT NULL,
+          timestamp TIMESTAMP
+          )", $tabla_nombre);
+          if($conexion2->query($sql) === false){
+              die("Error al crear tabla: " . $conexion2->error);
+          }
+        }
     }
 
     if (isset($_GET['cerrar_sesion'])) {
@@ -126,6 +145,8 @@
                                               <li><a class="dropdown-item my-2  me-1" href="#">Ropa y accesorios</a></li>
                                               <li><a class="dropdown-item my-2  me-1" href="#">Videojuegos & juguetes</a></li>
                                               <li><a class="dropdown-item my-2  me-1" href="#">Libros & material apoyo</a></li>
+                                              <li><a class="dropdown-item my-2  me-1" href="#">Postres</a></li>
+                                              <li><a class="dropdown-item my-2  me-1" href="#">Bebidas</a></li>
                                           </ul>
                                       </div>
                                   </div>
@@ -266,12 +287,11 @@
                       <a class="btn btn-primary shadow-0" type="button" href="editar.php?id=<?php echo $row["id"]; ?>">
                         <i class="bi bi-pencil-square"></i>
                           Editar
-                      </a>   
-                      <button onclick="esconder2()" class="btn btn-danger shadow-0" type="button">
+                      </a>
+                      <a onclick="esconder2()" class="btn btn-danger shadow-0" type="button" href="eliminar.php?id=<?php echo $row["id"]; ?>">
                         <i class="fa fa-trash"></i> Eliminar
-                    </button>               
-                    </div>
-                    
+                    </a>               
+                    </div>               
                   </div>
                 </div>
               </div>
