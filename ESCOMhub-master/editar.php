@@ -15,35 +15,42 @@
 
 	require_once("conexion2.php");
 	if (isset($_POST['guardar'])){
-          if(empty($_POST["nombreproduc"]) or empty($_POST["descproduc"]) or empty($_POST["precioproduc"]) 
-               or empty($_POST["cantidadproduc"]) or empty($_FILES['imagenproduc']['tmp_name'])){
+    if (empty($_POST["nombreproduc"]) or empty($_POST["descproduc"]) or empty($_POST["precioproduc"]) 
+        or empty($_POST["cantidadproduc"])){
 
-               $mensaje = '<div class="alerta">Por favor, completa todos los campos</div>';
+        $mensaje = '<div class="alerta">Por favor, completa todos los campos</div>';
 
-          }else{
-          $id = $_GET["id"];
-          $nombreproducto = $_POST['nombreproduc'];
-          $descripcion = $_POST['descproduc'];
-          $precio = $_POST['precioproduc'];
-          $cantidad = $_POST['cantidadproduc'];
-          $categoria = $_POST['categoriaproduc'];
-          $imagen = addslashes(file_get_contents($_FILES['imagenproduc']['tmp_name']));
+    }else{
+        $id = $_GET["id"];
+        $nombreproducto = $_POST['nombreproduc'];
+        $descripcion = $_POST['descproduc'];
+        $precio = $_POST['precioproduc'];
+        $cantidad = $_POST['cantidadproduc'];
+        $categoria = $_POST['categoriaproduc'];
 
-		$sql = "UPDATE " . $tabla_nombre . " SET nombreproducto='$nombreproducto', descripcion='$descripcion', 
-          precio='$precio', cantidad='$cantidad', categoria='$categoria', imagen='$imagen' WHERE id='$id'";
-          $resultado = $conexion2->query($sql);
-			
-		if($resultado){ 
-                    echo'<script type="text/javascript">alert("Cambios realizados con exito");
-               window.location.href="catalogov.php";
-        </script>';
-               } else {
-                    echo'<script type="text/javascript">alert("Error al editar vuelve a intertarlo");
-               window.location.href="catalogov.php";
-        </script>';
-               }
+        // Verificar si se ha enviado un nuevo archivo de imagen
+        if (!empty($_FILES['imagenproduc']['tmp_name'])) {
+            $imagen = addslashes(file_get_contents($_FILES['imagenproduc']['tmp_name']));
+            $sql = "UPDATE " . $tabla_nombre . " SET nombreproducto='$nombreproducto', descripcion='$descripcion', 
+                    precio='$precio', cantidad='$cantidad', categoria='$categoria', imagen='$imagen' WHERE id='$id'";
+        } else {
+            // Si no se envió un nuevo archivo, no actualizamos la imagen
+            $sql = "UPDATE " . $tabla_nombre . " SET nombreproducto='$nombreproducto', descripcion='$descripcion', 
+                    precio='$precio', cantidad='$cantidad', categoria='$categoria' WHERE id='$id'";
+        }
 
-	}
+        $resultado = $conexion2->query($sql);
+
+        if ($resultado) {
+            echo '<script type="text/javascript">alert("Cambios realizados con exito");
+                window.location.href="catalogov.php";
+            </script>';
+        } else {
+            echo '<script type="text/javascript">alert("Error al editar, vuelve a intentarlo");
+                window.location.href="catalogov.php";
+            </script>';
+        }
+    }
 }
 	$sql = $conexion2->prepare("SELECT * FROM " . $tabla_nombre . " WHERE id=?");
 	$sql->bind_param("i",$_GET["id"]);			
@@ -175,6 +182,8 @@
                                                     <li><a class="dropdown-item my-2  me-1" href="#">Ropa y accesorios</a></li>
                                                     <li><a class="dropdown-item my-2  me-1" href="#">Videojuegos & juguetes</a></li>
                                                     <li><a class="dropdown-item my-2  me-1" href="#">Libros & material apoyo</a></li>
+                                                    <li><a class="dropdown-item my-2  me-1" href="#">Postres</a></li>
+                                                    <li><a class="dropdown-item my-2  me-1" href="#">Bebidas</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -219,7 +228,7 @@
         </header>
     <body>
     <main>
-        <h4 class="my-3 text-center">Agregar producto</h4>
+        <h4 class="my-3 text-center">Editar producto</h4>
         <?php echo $mensaje; ?>
         <form action="" method="post" enctype="multipart/form-data" id="formularioproduc">
         <div class="row container-fluid ">
@@ -260,8 +269,10 @@
 
         <div class="row container-fluid">
             <div class="col-6 col-3 ms-5 mb-3">
-                <label for="formFile" class="form-label">Selecciona tu imagen, debe de ser de 300,160 px</label>
-                <input class="form-control" type="file" id="formFile" name="imagenproduc" >
+                <label for="formFile" class="form-label">Imagen Actual:</label>
+                <img src="data:image/jpg;base64,<?php echo base64_encode($row['imagen']); ?>" class="w-100">
+                <label for="formFile" class="form-label">Selecciona una nueva imagen (opcional), debe de ser de 300,160 px</label>
+                <input class="form-control" type="file" id="formFile" name="imagenproduc">
                 <div class="mt-1">
                     <a href="https://www.iloveimg.com/es/redimensionar-imagen#resize-options,pixels" target=”_blank”>REDIMENSIONAR </a>
                 </div>
@@ -281,6 +292,8 @@
                     <option value="ropas y accesorios">Ropas y Accesorios</option>
                     <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                     <option value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
                <?php elseif ($auxcurso == 'golosinas y frituras'): ?>
                     <option>Categoria</option>
                     <option value="comida preparada">Comida Preparada</option>
@@ -291,6 +304,8 @@
                     <option value="ropas y accesorios">Ropas y Accesorios</option>
                     <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                     <option value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
                <?php elseif ($auxcurso == 'electronica'): ?>
                     <option>Categoria</option>
                     <option value="comida preparada">Comida Preparada</option>
@@ -301,6 +316,8 @@
                     <option value="ropas y accesorios">Ropas y Accesorios</option>
                     <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                     <option value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
                <?php elseif ($auxcurso == 'papeleria'): ?>
                     <option>Categoria</option>
                     <option value="comida preparada">Comida Preparada</option>
@@ -311,6 +328,8 @@
                     <option value="ropas y accesorios">Ropas y Accesorios</option>
                     <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                     <option value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
                <?php elseif ($auxcurso == 'servicios'): ?>
                     <option>Categoria</option>
                     <option value="comida preparada">Comida Preparada</option>
@@ -321,6 +340,8 @@
                     <option value="ropas y accesorios">Ropas y Accesorios</option>
                     <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                     <option value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
                <?php elseif ($auxcurso == 'ropas y accesorios'): ?>
                     <option>Categoria</option>
                     <option value="comida preparada">Comida Preparada</option>
@@ -331,6 +352,8 @@
                     <option value="ropas y accesorios">Ropas y Accesorios</option>
                     <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                     <option value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
                <?php elseif ($auxcurso == 'ropas y accesorios'): ?>
                     <option>Categoria</option>
                     <option value="comida preparada">Comida Preparada</option>
@@ -341,6 +364,8 @@
                     <option selected="true" value="ropas y accesorios">Ropas y Accesorios</option>
                     <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                     <option value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
                <?php elseif ($auxcurso == 'videojuegos & juguetes'): ?>
                     <option>Categoria</option>
                     <option value="comida preparada">Comida Preparada</option>
@@ -351,7 +376,9 @@
                     <option value="ropas y accesorios">Ropas y Accesorios</option>
                     <option selected="true" value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                     <option value="libros & material apoyo">Libros & material de apoyo</option>
-               <?php else: ?>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
+                <?php elseif ($auxcurso == 'libros & material apoyo'): ?>
                     <option>Categoria</option>
                     <option value="comida preparada">Comida Preparada</option>
                     <option value="golosinas y frituras">Golosinas y frituras</option>
@@ -361,6 +388,32 @@
                     <option value="ropas y accesorios">Ropas y Accesorios</option>
                     <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                     <option selected="true" value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
+                <?php elseif ($auxcurso == 'postres'): ?>
+                    <option>Categoria</option>
+                    <option value="comida preparada">Comida Preparada</option>
+                    <option value="golosinas y frituras">Golosinas y frituras</option>
+                    <option value="electronica">Electronica</option>
+                    <option value="papeleria">Papeleria</option>
+                    <option value="servicios">Servicios</option>
+                    <option value="ropas y accesorios">Ropas y Accesorios</option>
+                    <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
+                    <option value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option selected="true" value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
+               <?php else: ?>
+                    <option>Categoria</option>
+                    <option value="comida preparada">Comida Preparada</option>
+                    <option value="golosinas y frituras">Golosinas y frituras</option>
+                    <option value="electronica">Electronica</option>
+                    <option value="papeleria">Papeleria</option>
+                    <option value="servicios">Servicios</option>
+                    <option value="ropas y accesorios">Ropas y Accesorios</option>
+                    <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
+                    <option value="libros & material apoyo">Libros & material de apoyo</option>
+                    <option value="postres">Postres</option>
+                    <option selected="true" value="bebidas">Bebidas</option>
                <?php endif ?>
             </select>
             </div>
