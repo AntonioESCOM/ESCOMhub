@@ -1,5 +1,6 @@
 <?php
     require_once("agregar.php");
+    $mensaje = "";
 ?>
 <html lang="es">
 <head>
@@ -120,6 +121,8 @@
                                                     <li><a class="dropdown-item my-2  me-1" href="#">Ropa y accesorios</a></li>
                                                     <li><a class="dropdown-item my-2  me-1" href="#">Videojuegos & juguetes</a></li>
                                                     <li><a class="dropdown-item my-2  me-1" href="#">Libros & material apoyo</a></li>
+                                                    <li><a class="dropdown-item my-2  me-1" href="#">Postres</a></li>
+                                                    <li><a class="dropdown-item my-2  me-1" href="#">Bebidas</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -224,8 +227,8 @@
                 <option value="ropas y accesorios">Ropas y Accesorios</option>
                 <option value="videojuegos & juguetes">Videojuegos & Juguetes</option>
                 <option value="libros & material apoyo">Libros & material de apoyo</option>
-
-
+                <option value="postres">Postres</option>
+                <option value="bebidas">Bebidas</option>
             </select>
             </div>
 
