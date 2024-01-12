@@ -376,7 +376,7 @@
                                     <div class="progress text-end mb-2" role="progressbar" aria-label="Danger example" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar bg-danger" style="width: 15%"></div>
                                     </div>
-                                    <h5 class="text-dark text-end letracard my-3 fs-5"><?php echo $row['vendidos']."/".$row['cantidad']." :Vendidas";?></h5>
+                                    <h5 class="text-dark text-end letracard my-3 fs-5"><?php echo $row['vendidos']."/".$row['cantidad']." Vendidas";?></h5>
                                 </div>
                             </div>
                             </a>
