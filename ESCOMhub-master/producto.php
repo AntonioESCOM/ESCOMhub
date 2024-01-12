@@ -20,6 +20,14 @@
     if ($result->num_rows > 0) {        
         $row = $result->fetch_assoc();
     }
+
+    $sql = $conexion2->prepare("SELECT * FROM vendedorestabla WHERE boleta=?");
+    $sql->bind_param("i",$row['boletavendedor']);          
+    $sql->execute();
+    $result = $sql->get_result();
+    if ($result->num_rows > 0) {        
+        $row2 = $result->fetch_assoc();
+    }
 ?>
 
 <!doctype html>
@@ -139,6 +147,16 @@
                                             </div>
                                         </div>
                                     </li>
+                                    <?php
+                                if (isset($_SESSION['boleta_sesion']) && !empty($_SESSION['boleta_sesion'])) {
+                                    echo '
+                                    <li class="nav-item">
+                                            <a class="nav-link borde-derecho py-0 px-4" aria-expanded="false" href="?cerrar_sesion=1">
+                                                Cerrar sesión
+                                            </a>
+                                    </li>';
+                                }
+                            ?>
                                 </ul>
                             </div>
                             <div class="col-4 d-none d-lg-block">    
@@ -303,15 +321,50 @@
                         <div class="row">
                             <div class="col-sm-6 pe-1 div_botoncar-comprodcuto">
                             <?php
-                                if (isset($_SESSION['boleta_sesion']) && !empty($_SESSION['boleta_sesion'])) {
-                                    echo '
-                                    <button id="enseñarc" class="btn botoncar-comprodcuto w-100  rounded-start-pill boton-compra-sm fs-5" type="button">Comprar Ahora</button>';
-                                }
-                                else {
-                                    echo '
-                                    <button id="enseñarc" class=" disabled btn botoncar-comprodcuto w-100  rounded-start-pill boton-compra-sm fs-5 " type="button">Comprar Ahora</button>';
-                                }
-                            ?>
+if(isset($_SESSION['boleta_sesion']) && !empty($_SESSION['boleta_sesion']) && ($row['cantidad'])>0) {
+    echo '
+        <button type="submit" class="btn botoncar-comprodcuto w-100 rounded-start-pill boton-compra-sm fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal" name="comprar">Comprar Ahora</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-body p-0">
+                    <div class="p-3 mb-2 bg-success text-white text-center py-5"><h4>Excelente Compra</h4></div>
+                    <div class="text-center mt-4 mx-2 text-secondary">
+                        <h5>Te avisaremos cuando puedas retirar, le hemos enviado un mensaje al vendedor</h5>
+                        <div class="mt-3">
+                            <img src="data:image/jpg;base64,' . base64_encode($row['imagen']) . '" class="card-img-top" alt="' . htmlspecialchars($row['nombreproducto']) . '">
+                        </div>
+                        <h5 class="mt-3">Si deseas contactar al vendedor te dejamos los siguientes enlaces.</h5>
+                        <h6 class="text-start mt-5"><a href="https://wa.me/'.$row2['telefono'].'" target=”_blank” class="fs-5 letraalef text-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                </svg> '.$row2['telefono'].'</a>
+                        </h6>
+                        <h6 class="text-start mb-3"><a href="'.$row2['redsocial'].'" class="fs-5 letraalef text-secondary" target=”_blank”>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-messenger" viewBox="0 0 16 16">
+                                    <path d="M0 7.76C0 3.301 3.493 0 8 0s8 3.301 8 7.76-3.493 7.76-8 7.76c-.81 0-1.586-.107-2.316-.307a.639.639 0 0 0-.427.03l-1.588.702a.64.64 0 0 1-.898-.566l-.044-1.423a.639.639 0 0 0-.215-.456C.956 12.108 0 10.092 0 7.76m5.546-1.459-2.35 3.728c-.225.358.214.761.551.506l2.525-1.916a.48.48 0 0 1 .578-.002l1.869 1.402a1.2 1.2 0 0 0 1.735-.32l2.35-3.728c.226-.358-.214-.761-.551-.506L9.728 7.381a.48.48 0 0 1-.578.002L7.281 5.98a1.2 1.2 0 0 0-1.735.32z"/>
+                                </svg>
+                                ' . $row2['nombre'] . ' ' . $row2['apellido'] . '
+                            </a>
+                        </h6>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="mx-auto">
+                        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" onclick="confirmarYRecargar()">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    ';
+    include('comprar.php');
+} else {
+    echo '
+    <button id="enseñarc" class=" disabled btn botoncar-comprodcuto w-100  rounded-start-pill boton-compra-sm fs-5 " type="button">Comprar Ahora</button>';
+}
+?>
                             </div>
                             <div class="col-sm-6 ps-1 div_botoncar-comprodcuto">
                                 <button class="btn botoncar-comprodcuto w-100 rounded-end-pill boton-compra-sm fs-5" type="button">Agregar al Carrito</button>
@@ -338,7 +391,7 @@
                             <div class="progress text-end mb-2" role="progressbar" aria-label="Danger example" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
                             <div class="progress-bar bg-danger" style="width: 15%"></div>
                             </div>
-                            <h5 class="text-dark text-end letracard my-3 fs-5"><?php echo $row['vendidos']."/".$row['cantidad']." :Vendidas";?> </h5>
+                            <h5 class="text-dark text-end letracard my-3 fs-5"><?php echo $row['vendidos']." Vendidos ".$row['cantidad']." Disponibles";?> </h5>
                         </div>
                     </div>
                     <div class="row container">
@@ -360,15 +413,6 @@
                                 <div class="card-body color_card_descrip rounded-5 rounded-top-0 ">
                                     <h6 class="card-title text-center fs-5 letraalef">
                                 <?php
-                                    require_once("conexion2.php");
-                                    $sql = $conexion2->prepare("SELECT * FROM vendedorestabla WHERE boleta=?");
-                                    $sql->bind_param("i",$row['boletavendedor']);          
-                                    $sql->execute();
-                                    $result = $sql->get_result();
-                                    if ($result->num_rows > 0) {        
-                                        $row2 = $result->fetch_assoc();
-                                    }
-
                                     $hora_inicio_str = $row2['hora_inicio'];
                                     $hora_fin_str = $row2['hora_fin'];
 
@@ -381,24 +425,6 @@
                                     echo "Vendido por: ".$row2['nomusuario'];
                                 ?>
                                     
-                                </div>
-                            </div>
-                            <div id="contacto" class="card rounded-5 ocultar_contacto"> 
-                                <div class="rounded-5 rounded-bottom-0 text-center card-header botoncar-comprodcuto letraalef fs-5">
-                                    Datos de Contacto
-                                </div>
-                                <div class="card-body color_card_descrip rounded-5 rounded-top-0 ">
-                                    <h6 class="card-title text-center "><a class="fs-5 letraalef"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
-                                        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-                                        </svg> 5524209358</a>
-                                    </h6>
-                                    <h6 class="card-title text-center "><a class="fs-5 letraalef">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-messenger" viewBox="0 0 16 16">
-                                            <path d="M0 7.76C0 3.301 3.493 0 8 0s8 3.301 8 7.76-3.493 7.76-8 7.76c-.81 0-1.586-.107-2.316-.307a.639.639 0 0 0-.427.03l-1.588.702a.64.64 0 0 1-.898-.566l-.044-1.423a.639.639 0 0 0-.215-.456C.956 12.108 0 10.092 0 7.76m5.546-1.459-2.35 3.728c-.225.358.214.761.551.506l2.525-1.916a.48.48 0 0 1 .578-.002l1.869 1.402a1.2 1.2 0 0 0 1.735-.32l2.35-3.728c.226-.358-.214-.761-.551-.506L9.728 7.381a.48.48 0 0 1-.578.002L7.281 5.98a1.2 1.2 0 0 0-1.735.32z"/>
-                                        </svg>
-                                        Brandon Beleche
-                                    </a>
-                                    </h6>
                                 </div>
                             </div>
                         </div>
@@ -545,4 +571,10 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script>
+    function confirmarYRecargar() {
+        // Puedes agregar aquí cualquier lógica adicional que necesites antes de recargar la página
+        location.reload();
+    }
+</script>
 </html>
