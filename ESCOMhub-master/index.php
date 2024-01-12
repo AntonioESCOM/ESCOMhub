@@ -351,88 +351,40 @@
             <br>
             <div class="container text-center">
                 <div class="row mt-3">
-                    <div class="col-md-3 ">
+<?php
+        //GENERACIÓN DE CARTAS CON LOS ARTICULOS
+
+        $sql = "SELECT * FROM productos ORDER BY RAND() LIMIT 4";
+        $resultado = $conexion2->query($sql);
+        while ($row = $resultado->fetch_assoc()) {
+  ?>
+                    <div class="col-md-3">
                             <button class="sinborde ">
-                            <a href="producto.php">
+                            <a href="producto.php?id=<?php echo $row["id"]; ?>">
                             <div class="card" style="width: 16rem;">
-                                <img src="imgs/image 11 (1).png" class="card-img-top" alt="Galletas del cosco">
+                                <img src="data:image/jpg;base64,<?php echo base64_encode($row['imagen']); ?>" 
+                                class="card-img-top" alt="<?php echo htmlspecialchars($row['nombreproducto']); ?>">
                                 <div class="card-body">
-                                    <h5 class="card-title text-end letracards mb-0">Galletas cosco </h5>
-                                    <h5 class="card-title text-end letracards">Chispas de chocolate </h5>
+                                    <h5 class="card-title text-end letracards mb-0"><?php echo $row['nombreproducto'];?></h5>
                                     <div class="estrellas text-end">
-                                        <p class="text-body-tertiary">(6 reviews)</p>
+                                        <p class="text-body-tertiary"><?php $numeroAleatorio = rand(0, 10);
+                                        echo "(".$numeroAleatorio." reviews)"?></p>
                                         <img src="imgs/image 14.png" alt="estrellas">
                                     </div>
-                                    <h5 class="card-title text-end letracards colorletrasprecio mt-2 fw-semibold">$10 C/U </h5>
+                                    <h5 class="card-title text-end letracards colorletrasprecio mt-2 fw-semibold">
+                                    <?php echo "$ " .$row['precio']. "C/U";?> </h5>
                                     <div class="progress text-end mb-2" role="progressbar" aria-label="Danger example" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar bg-danger" style="width: 15%"></div>
                                     </div>
-                                    <h5 class="text-dark text-end letracard my-3 fs-5">3/20 :Vendidas </h5>
+                                    <h5 class="text-dark text-end letracard my-3 fs-5"><?php echo $row['vendidos']."/".$row['cantidad']." :Vendidas";?></h5>
                                 </div>
                             </div>
                             </a>
                             </button>
                     </div>
-                    <div class="col-md-3 ">
-                        <button class="sinborde">
-                            <div class="card" style="width: 16rem;">
-                                <img src="imgs/image 12 (1).png" class="card-img-top" alt="Galletas del cosco">
-                                <div class="card-body">
-                                    <h5 class="card-title text-end letracards mb-0">Trufas de nuez </h5>
-                                    <h5 class="card-title text-end letracards" style="visibility: hidden;">Chispas de chocolate </h5>
-                                    <div class="estrellas text-end">
-                                        <p class="text-body-tertiary">(2 reviews)</p>
-                                        <img src="imgs/image 14.png" alt="estrellas">
-                                    </div>
-                                    <h5 class="card-title text-end letracards colorletrasprecio mt-2 fw-semibold">$5 C/U </h5>
-                                    <div class="progress text-end mb-2" role="progressbar" aria-label="Danger example" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar bg-danger" style="width: 15%"></div>
-                                    </div>
-                                    <h5 class="text-dark text-end letracard my-3 fs-5">5/50 :Vendidas </h5>
-                                </div>
-                            </div>
-                            </button>
-                    </div>
-                    <div class="col-md-3">
-                        <button class="sinborde">
-                            <div class="card" style="width: 16rem;">
-                                <img src="imgs/image 10 (1).png" class="card-img-top" alt="Galletas del cosco">
-                                <div class="card-body">
-                                    <h5 class="card-title text-end letracards mb-0">Rebanada de pizza </h5>
-                                    <h5 class="card-title text-end letracards">Cosco </h5>
-                                    <div class="estrellas text-end">
-                                        <p class="text-body-tertiary">(14 reviews)</p>
-                                        <img src="imgs/image 14.png" alt="estrellas">
-                                    </div>
-                                    <h5 class="card-title text-end letracards colorletrasprecio mt-2 fw-semibold">$25 C/U </h5>
-                                    <div class="progress text-end mb-2" role="progressbar" aria-label="Danger example" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar bg-danger" style="width: 15%"></div>
-                                    </div>
-                                    <h5 class="text-dark text-end letracard my-3 fs-5">2/20 :Vendidas </h5>
-                                </div>
-                            </div>
-                            </button>
-                    </div>
-                    <div class="col-md-3">
-                        <button class="sinborde">
-                            <div class="card" style="width: 16rem;">
-                                    <img src="imgs/imagen 9 (1).jpg" class="card-img-top" alt="Galletas del cosco">
-                                <div class="card-body">
-                                    <h5 class="card-title text-end letracards mb-0">Refresco 355ml </h5>
-                                    <h5 class="card-title text-end letracards">Variedad de sabores</h5>
-                                    <div class="estrellas text-end">
-                                        <p class="text-body-tertiary">(6 reviews)</p>
-                                        <img src="imgs/image 14.png" alt="estrellas">
-                                    </div>
-                                    <h5 class="card-title text-end letracards colorletrasprecio mt-2 fw-semibold">$10 C/U </h5>
-                                    <div class="progress text-end mb-2" role="progressbar" aria-label="Danger example" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar bg-danger" style="width: 15%"></div>
-                                    </div>
-                                    <h5 class="text-dark text-end letracard my-3 fs-5">3/20 :Vendidas </h5>
-                                </div>
-                            </div>
-                            </button>
-                    </div>
+        <?php
+            } //<-- fin while -->
+        ?>
                 </div>
             </div>
         </main>
